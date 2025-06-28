@@ -1,0 +1,5 @@
+# Project-specific ignored files/folders
+/data/
+/venv/
+*.log
+.DS_Store # macOS system files
