@@ -1,0 +1,46 @@
+# config/config.yaml
+
+# --- Data Source Configuration ---
+exchange: binance
+symbol: BTCUSDT # Example: BTCUSDT, ETHUSDT, SOLUSDT
+interval: 1m    # Example: 1m, 5m, 1h, 1d
+
+# Earliest date to start fetching data. Format: YYYY-MM-DD
+# Binance BTCUSDT data typically starts around 2017-08-17
+start_date: 2017-08-15
+
+# --- File System Configuration ---
+# Base directory for raw data (e.g., data/raw/binance/BTCUSDT/1m/)
+base_data_output_dir: data/raw/
+# Checkpoint file to track download progress (e.g., data/raw/binance/BTCUSDT/1m/download_progress.json)
+checkpoint_filename: download_progress.json
+# Log file for the pipeline
+log_file: download_pipeline.log
+
+# --- Exchange API Configuration ---
+# Binance API key and secret (optional for public klines, but good practice for future)
+# If not needed, leave blank or remove.
+binance_api_key: ""
+binance_api_secret: ""
+
+# --- TA-Lib Indicator Configuration ---
+# Define indicators and their parameters.
+# List for single-parameter indicators (e.g., [14, 28] for RSI_14, RSI_28)
+# List of tuples for multi-parameter indicators (e.g., [(12, 26, 9)] for MACD)
+ta_indicators:
+  RSI: [14, 28]
+  SMA: [10, 20, 50, 100, 200]
+  EMA: [10, 20, 50, 100, 200]
+  MACD: [(12, 26, 9)] # (fastperiod, slowperiod, signalperiod)
+  BBANDS: [(20, 2)]    # (timeperiod, nbdev)
+  ADX: [14]
+  MOM: [10]
+  STOCH: [(14, 3, 3)] # (fastk_period, slowk_period, slowd_period)
+  ATR: [14]
+
+# Max klines per API request (Binance limit is 1000)
+klines_per_request: 1000
+# Retry attempts for API calls
+api_retries: 5
+# Backoff factor for retries (e.g., 2 -> 1s, 2s, 4s, 8s, 16s)
+api_backoff_factor: 2

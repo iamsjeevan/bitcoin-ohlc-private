@@ -1,0 +1,6 @@
+pandas
+pyarrow
+python-binance
+TA-Lib
+tqdm
+pyyaml
